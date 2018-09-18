@@ -1,0 +1,22 @@
+/* ==========================================================================
+   # COMPONENTS.NAV
+   ========================================================================== */
+
+.c-nav,
+%c-nav {
+  $root: &;
+  display: flex;
+  flex-wrap: wrap;
+  @include reset-list();
+}
+
+.c-nav__item,
+%c-nav__item {
+  display: block;
+  padding: .5rem 1rem;
+}
+
+.c-nav--vertical,
+%c-nav--vertical {
+  flex-direction: column;
+}

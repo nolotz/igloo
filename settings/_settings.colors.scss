@@ -1,0 +1,174 @@
+///* ========================================================================
+//   #COLORS
+//   ======================================================================== */
+
+/// primary brand color
+/// @type {color}
+$ecx-colors-brand-primary: #ED3237 !default;
+
+/// primary brand color light version
+/// @type {color}
+$ecx-colors-brand-primary-light: lighten($ecx-colors-brand-primary, 10%) !default;
+
+/// primary brand color dark version
+/// @type {color}
+$ecx-colors-brand-primary-dark: darken($ecx-colors-brand-primary, 10%) !default;
+
+
+/// secondary brand color
+/// @type {color}
+$ecx-colors-brand-secondary: #727376 !default;
+
+/// secondary brand color light version
+/// @type {color}
+$ecx-colors-brand-secondary-light: lighten($ecx-colors-brand-secondary, 10%) !default;
+
+/// secondary brand color dark version
+/// @type {color}
+$ecx-colors-brand-secondary-dark: darken($ecx-colors-brand-secondary, 10%) !default;
+
+
+/// tertiary brand color
+/// @type {color}
+$ecx-colors-brand-tertiary: #f7f7f7 !default;
+
+/// tertiary brand color light version
+/// @type {color}
+$ecx-colors-brand-tertiary-light: lighten($ecx-colors-brand-tertiary, 10%) !default;
+
+/// tertiary brand color dark version
+/// @type {color}
+$ecx-colors-brand-tertiary-dark: darken($ecx-colors-brand-tertiary, 10%) !default;
+
+
+/// quaternary brand color
+/// @type {color}
+$ecx-colors-brand-quaternary: #E6E8E6 !default;
+
+/// quaternary brand color light version
+/// @type {color}
+$ecx-colors-brand-quaternary-light: lighten($ecx-colors-brand-quaternary, 10%) !default;
+
+/// quaternary brand color dark version
+/// @type {color}
+$ecx-colors-brand-quaternary-dark: darken($ecx-colors-brand-quaternary, 10%) !default;
+
+
+/// error
+/// @type {color}
+$ecx-colors-error: #e14e61 !default;
+
+/// success
+/// @type {color}
+$ecx-colors-success: #3ad587 !default;
+
+/// text
+/// @type {color}
+$ecx-colors-text: #333 !default;
+
+/// black
+/// @type {color}
+$ecx-colors-black: #111 !default;
+
+/// white
+/// @type {color}
+$ecx-colors-white: #FFF !default;
+
+/// grey map
+/// @type {map}
+$ecx-colors-grey-map: (
+  1: #f5f5f5,
+  2: #f1f1f1,
+  3: #e7e7e7,
+  4: #e4e4e4,
+  5: #b5b5b4,
+  6: #868686,
+  7: #4c4c4c,
+  8: #3d3d3d,
+  9: #333333,
+  10: #292929,
+  11: #1f1f1f,
+  12: #141414,
+  13: #0a0a0a
+) !default;
+
+/// default grey key value
+/// @type {number}
+$ecx-colors-grey-map-default: 4 !default;
+
+
+/// facebook color
+/// @type {color}
+/// @link http://www.paulund.co.uk/social-media-colours
+$ecx-colors-social-facebook: #3b5998 !default;
+
+/// twitter color
+/// @type {color}
+/// @link http://www.paulund.co.uk/social-media-colours
+$ecx-colors-social-twitter: #00aced !default;
+
+/// googleplus color
+/// @type {color}
+/// @link http://www.paulund.co.uk/social-media-colours
+$ecx-colors-social-googleplus: #dd4b39 !default;
+
+/// pinterest color
+/// @type {color}
+/// @link http://www.paulund.co.uk/social-media-colours
+$ecx-colors-social-pinterest: #cb2027 !default;
+
+
+/// colors palette
+/// @type {map}
+$ecx-colors-palette: (
+  'primary': (
+    light: $ecx-colors-brand-primary-light,
+    base: $ecx-colors-brand-primary,
+    dark: $ecx-colors-brand-primary-dark,
+  ),
+  'secondary': (
+    light: $ecx-colors-brand-secondary-light,
+    base: $ecx-colors-brand-secondary,
+    dark: $ecx-colors-brand-secondary-dark,
+  ),
+  'tertiary': (
+    light: $ecx-colors-brand-tertiary-light,
+    base: $ecx-colors-brand-tertiary,
+    dark: $ecx-colors-brand-tertiary-dark,
+  ),
+  'quaternary': (
+    light: $ecx-colors-brand-quaternary-light,
+    base: $ecx-colors-brand-quaternary,
+    dark: $ecx-colors-brand-quaternary-dark,
+  ),
+  'black': (
+    base: $ecx-colors-black
+  ),
+  'white': (
+    base: $ecx-colors-white
+  ),
+  'text': (
+    base: $ecx-colors-text
+  ),
+  'success': (
+    base: $ecx-colors-success
+  ),
+  'error': (
+    base: $ecx-colors-error
+  ),
+  'grey': map-merge($ecx-colors-grey-map, (base: $ecx-colors-grey-map-default))
+) !default;
+
+/// utility colors palette
+/// @type {map}
+$ecx-colors-palette-utils: (
+  'primary': (light, base, dark),
+  'secondary': (light, base, dark),
+  'tertiary': (light, base, dark),
+  'quaternary': (light, base, dark),
+  'text': (base),
+  'white': (base),
+  'black': (base),
+  'error': (base),
+  'success': (base)
+) !default;

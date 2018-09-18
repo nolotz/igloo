@@ -1,0 +1,24 @@
+///* ========================================================================
+//   # COMPONENTS.ALERT
+//   ======================================================================== */
+$ecx-component-alert-success-border: palette(success) !default;
+$ecx-component-alert-success-background: transparentize($ecx-component-alert-success-border, 0.85) !default;
+
+$ecx-component-alert-error-border: palette(error) !default;
+$ecx-component-alert-error-background: transparentize($ecx-component-alert-error-border, 0.85) !default;
+
+.c-alert {
+  border-radius: 3px;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+
+  &--error {
+    border-color: $ecx-component-alert-error-border;
+    background: $ecx-component-alert-error-background;
+  }
+
+  &--success {
+    border-color: $ecx-component-alert-success-border;
+    background: $ecx-component-alert-success-background;
+  }
+}

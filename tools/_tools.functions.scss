@@ -1,0 +1,91 @@
+/**
+ * color palette
+ * @param  {String} $color color key
+ * @param  {String} $tone: 'base'        color-tone
+ * @return {Color}        color tone value from palette
+ */
+@function palette($color, $tone: 'base') {
+  @return map-get(map-get($ecx-colors-palette, inspect($color)), $tone);
+}
+
+/**
+ * has color palette
+ * @param  {String} $color color key
+ * @param  {String} $tone: 'base'        color-tone
+ * @return {Boolean}        key and tone exists
+ */
+@function palette-has($color, $tone: 'base') {
+  @if map_has_key($ecx-colors-palette, inspect($color)) == false {
+    @return false;
+  }
+
+  @return map_has_key(map-get($ecx-colors-palette, inspect($color)), $tone);
+}
+
+/**
+ * spacing scale
+ * @param  {String|Number} $scale
+ * @return {Number}
+ */
+@function spacing-scale($scale: base) {
+  $text-mapping: (
+      tiny: $inuit-global-spacing-unit-factor-tiny,
+      small: $inuit-global-spacing-unit-factor-small,
+      large: $inuit-global-spacing-unit-factor-large,
+      huge: $inuit-global-spacing-unit-factor-huge
+  );
+
+  @if ($scale == base) {
+    @return $inuit-global-spacing-unit;
+  }
+
+  @if (map_has_key($text-mapping, $scale)) {
+    $scale: map-get($text-mapping, $scale);
+  }
+
+  @return round($scale * $inuit-global-spacing-unit);
+}
+
+/// Find Opposite Direction (compass helper)
+///
+/// ---
+/// @param {String} $dir - direction
+/// @return {String} - opposite direction
+/// ---
+/// @link https://github.com/at-import/Singularity/blob/1.x.x/stylesheets%2Fsingularitygs%2Fhelpers%2F_directions.scss
+@function opposite-direction($dir) {
+  @if $dir == 'left' {
+    @return right;
+  } @else if  $dir == 'right' {
+    @return left;
+  } @else if $dir == 'ltr' {
+    @return rtl;
+  } @else if $dir == 'rtl' {
+    @return ltr;
+  } @else if $dir == 'top' {
+    @return bottom;
+  } @else if $dir == 'bottom' {
+    @return top;
+  } @else {
+    @warn "#{$dir} is not a direction! Make sure your direction is all lowercase!";
+    @return false;
+  }
+}
+
+@function color-yiq($color) {
+  $r: red($color);
+  $g: green($color);
+  $b: blue($color);
+
+  $yiq: (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+
+  @if $color == transparent {
+    @return $color;
+  }
+
+  @if ($yiq >= 150) {
+    @return palette(black);
+  } @else {
+    @return palette(white);
+  }
+}

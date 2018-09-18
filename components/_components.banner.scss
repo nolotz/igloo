@@ -1,0 +1,30 @@
+///* ========================================================================
+//   # COMPONENTS.BANNER
+//   ======================================================================== */
+
+$ecx-component-banner-padding: 5vh;
+$ecx-component-banner-padding--mobile: 24px;
+
+.c-banner {
+  position: relative;
+  width: 100%;
+  position: relative;
+
+  // For Background Images
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  &__body {
+    z-index: 20;
+
+
+    padding-top: $ecx-component-banner-padding--mobile;
+    padding-bottom: $ecx-component-banner-padding--mobile;
+
+    @include mq(tablet) {
+      padding-top: $ecx-component-banner-padding;
+      padding-bottom: $ecx-component-banner-padding;
+    }
+  }
+}

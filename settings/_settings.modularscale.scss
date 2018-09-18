@@ -1,0 +1,19 @@
+///* ========================================================================
+//   # SETTINGS.MODULARSCALE
+//   ======================================================================== */
+
+$ecx-modularscale-font-size: 14px !default;
+$ecx-modularscale-scale-ratio: 1.125 !default;
+
+$ecx-modularscale-font-size-medium: 16px !default;
+$ecx-modularscale-scale-ratio-medium: $ecx-modularscale-scale-ratio !default;
+
+$ecx-modularscale-font-size-large: $ecx-modularscale-font-size-medium !default;
+$ecx-modularscale-scale-ratio-large: 1.2 !default;
+
+$ecx-modularscale-mapping: (base: $ecx-modularscale-font-size, ratio: $ecx-modularscale-scale-ratio) !default;
+
+// 	not in use !
+//  modularscale-line-height-large: 1.6 !default;
+//  modularscale-line-height: 1.2 !default;
+//  modularscale-line-height-medium: 1.4 !default;

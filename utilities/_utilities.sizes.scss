@@ -1,0 +1,18 @@
+///* ========================================================================
+//   # UTILITIES.SIZES
+//   ======================================================================== */
+
+$ecx-utilities-sizes-prefixes: ('min-', '', 'max-') !default;
+$ecx-utilities-sizes-attributes: (height, width) !default;
+$ecx-utilities-sizes-values: ('-auto': auto, '-100': 100%, '-none': 0, '-65vh': 65vh, '-25vh': 25vh) !default;
+
+@each $attribute in $ecx-utilities-sizes-attributes {
+  @each $prefix in $ecx-utilities-sizes-prefixes {
+    @each $sizeName, $size in $ecx-utilities-sizes-values {
+      .u-#{$prefix}#{$attribute}#{$sizeName} {
+        #{$prefix}#{$attribute}: $size;
+      }
+    }
+  }
+}
+

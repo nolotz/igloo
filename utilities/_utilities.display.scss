@@ -1,0 +1,20 @@
+///* ========================================================================
+//   # UTILITIES.DISPLAY
+//   ======================================================================== */
+
+$ecx-utilities-display: (flex, block, none, 'inline-box', 'inline-flex') !default;
+$ecx-utilities-display-breakpoints: $ecx-global-breakpoints !default;
+
+@each $display-type in $ecx-utilities-display {
+  .u-display-#{$display-type} {
+    display: #{$display-type};
+  }
+
+  @each $breakpoint-name, $breakpoint-value in $ecx-utilities-display-breakpoints {
+    @include mq($breakpoint-name) {
+      .u-display-#{$display-type}\@#{$breakpoint-name} {
+        display: #{$breakpoint-value};
+      }
+    }
+  }
+}

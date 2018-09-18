@@ -1,0 +1,301 @@
+
+/// Clearfix
+/// ---
+@mixin clearfix() {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+/// Reset Link
+/// ---
+@mixin reset-link() {
+  text-decoration: none !important;
+  color: inherit;
+  font-weight: inherit;
+
+  &:hover {
+    color: currentColor;
+  }
+}
+
+
+/// Remove Touch Highlight
+/// remove highlighting on tap / touch
+///
+/// ---
+/// @link https://developer.mozilla.org/de/docs/Web/CSS/-webkit-tap-highlight-color
+@mixin remove-touch-highlight() {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/// Text Shadow
+///
+/// ---
+/// @param {number} $offset-x - horizontal offset
+/// @param {number} $offset-y - vertical offset
+/// @param {number} $blur-radius: blur (higher value makes the shadow become wider and lighter)
+/// @param {color} $color: shadow color
+/// ---
+///
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow MDN article
+@mixin text-shadow($h-offset: 1px, $v-offset: 1px, $blur: 5px, $color: rgba($black, 0.5)) {
+  text-shadow: $h-offset $v-offset $blur $color;
+}
+
+/// Drop Shadow
+///
+/// ---
+/// @param {number} $offset-x - horizontal offset
+/// @param {number} $offset-y - vertical offset
+/// @param {number} $blur-radius: blur (higher value makes the shadow become wider and lighter)
+/// @param {color} $color: shadow color
+/// ---
+///
+/// @link https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow MDN article
+
+@mixin drop-shadow($h-offset: 1px, $v-offset: 1px, $blur: 5px, $color: rgba($black, 0.8)) {
+  filter: drop-shadow($h-offset $v-offset $blur $color);
+  -webkit-filter: drop-shadow($h-offset $v-offset $blur $color);
+}
+
+
+/// Size helper mixin
+///
+/// ---
+/// @param {number} $width: width
+/// @param {number} $height [$width] - height
+/// ---
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+/// Position helper mixin
+/// Article about it: http://hugogiraudel.com/2013/08/05/offsets-sass-mixin/
+/// @access private
+/// ---
+/// @param {string} $position - position type
+/// @param {list} $args - list of offsets and values
+/// ---
+@mixin _position($position, $args) {
+  @each $o in top right bottom left {
+    $i: index($args, $o);
+    @if $i
+        and $i + 1 <= length($args)
+        and type-of( nth($args, $i + 1) ) == number {
+      #{$o}: nth($args, $i + 1);
+    }
+  }
+  position: $position;
+}
+
+/// Absolute positioning helper mixin
+///
+///  ---
+/// @param {list} $args: list of offsets and values
+/// ---
+/// @link http://hugogiraudel.com/2013/08/05/offsets-sass-mixin/ Article about it
+@mixin absolute($args) {
+  @include _position(absolute, $args);
+}
+
+/// Arrow helper mixin
+///
+/// ---
+/// @param {String} $direction                     - arrow direction
+/// @param {list} $position                        - list of offsets and values
+/// @param {color} $color [currentColor | inherit] - arrow color
+/// @param {number} $size [1em]                    - arrow size
+/// ---
+/// @example
+///         &:before {
+///            @include triangle(
+///                $direction : left,
+///                $position  : left $offset top 50%,
+///                $color     : white,
+///                $size      : 20px
+///            );
+/// @link https://brettstrikesback.com/de-pixelating-the-css-triangle/ fixed pixelated edge in firefox
+@mixin triangle($direction, $position, $color: currentColor, $size: 1em) {
+  // Make sure the direction is valid
+  @if not index(top right bottom left, $direction) {
+    @warn "Direction must be one of top, right, bottom or left.";
+  } @else {
+    @include absolute($position); // Position
+    @include size(0); // Size
+    content: '';
+    z-index: 2;
+
+    $opp-dir: opposite-direction($direction);
+
+    // border-#{$opp-dir}: $size*0.8 solid $color;
+    border-#{$opp-dir}: $size solid $color;
+    $perpendicular-borders: $size solid transparent;
+
+    @if $direction == top or $direction == bottom {
+      border-left:   $perpendicular-borders;
+      border-right:  $perpendicular-borders;
+    }
+
+    @else if $direction == right or $direction == left {
+      border-bottom: $perpendicular-borders;
+      border-top:    $perpendicular-borders;
+    }
+  }
+}
+
+/// reset default list styles
+@mixin reset-list() {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/// Custom-Scrollbar
+/// force permanent visibility of scrollbar for mac/iOS
+///
+/// ---
+/// @param {number} $size: width & height
+/// @param {number} $radius: border-radius
+/// @param {number} $opacity: opacity
+/// @param {boolean} $touch-only: show only on device with $touch-support
+/// ---
+///
+/// @link https://css-tricks.com/almanac/properties/s/scrollbar/
+
+@mixin scrollbar($size: 5px, $radius: 8px, $opacity: 0.2, $touch-only: false) {
+  // @if($touch-only) {
+  //     .#{$touch-support} & {
+  // }
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: $radius;
+    background-color: rgba(0, 0, 0, $opacity);
+  }
+  // @if($touch-only) {
+  //     }
+  // }
+}
+
+// http://codepen.io/laustdeleuran/pen/DBaAu
+@mixin scrolling-shadows($background-color: rgb(255, 255, 255), $shadow-intensity: 0.3, $shadow-color: rgb(0,0,0), $cover-size: 40px, $shadow-size: 14px) {
+
+  background:
+    // Shadow covers
+    linear-gradient($background-color 30%, rgba($background-color, 0)),
+    linear-gradient(rgba($background-color, 0), $background-color 70%) 0 100%,
+
+      // Shadows
+    radial-gradient(50% 0, farthest-side, rgba($shadow-color,$shadow-intensity), rgba($shadow-color, 0)),
+    radial-gradient(50% 100%, farthest-side, rgba($shadow-color,$shadow-intensity), rgba($shadow-color, 0)) 0 100%;
+  background:
+    // Shadow covers
+    linear-gradient($background-color 30%, rgba($background-color, 0)),
+    linear-gradient(rgba($background-color, 0), $background-color 70%) 0 100%,
+
+      // Shadows
+    radial-gradient(farthest-side at 50% 0, rgba($shadow-color, $shadow-intensity), rgba($shadow-color, 0)),
+    radial-gradient(farthest-side at 50% 100%, rgba($shadow-color, $shadow-intensity), rgba($shadow-color, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-color: $background-color;
+  background-size: 100% $cover-size, 100% $cover-size, 100% $shadow-size, 100% $shadow-size;
+
+  // Opera doesn't support this in the shorthand
+  background-attachment: local, local, scroll, scroll;
+}
+
+@mixin create-ghost-button-variant($color-value) {
+  color: $color-value;
+
+  &:hover,
+  &:focus {
+    color: color-yiq($color-value);
+    background-color: $color-value;
+    border-color: $color-value;
+  }
+}
+
+@mixin create-button-variant($background-color, $background-color-hover) {
+  background-color: $background-color;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: color-yiq($background-color);
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $background-color-hover;
+  }
+}
+
+
+@mixin create-util-colors($color-name, $color-value, $tone: 'base') {
+  $suffix: null;
+  @if($tone == 'base') {
+    $suffix: null;
+  } @else {
+    $suffix: '--#{$tone}';
+  }
+
+  // Background Colors
+  .u-background-color-#{$color-name}#{$suffix} {
+    background-color: #{$color-value};
+  }
+
+  .u-overlay-color-#{$color-name}#{$suffix} {
+    &:before {
+      background-color: transparentize($color-value, 0.2);
+    }
+  }
+
+  .u-overlay-color-#{$color-name}#{$suffix}-fade-out {
+    &:before {
+      background: rgba(44, 44, 44, 0.2);
+      background: linear-gradient(0deg, rgba(44, 44, 44, 0.2), transparentize($color-value, 0.05));
+    }
+  }
+
+  // Text Colors
+  .u-text-color-#{$color-name}#{$suffix} {
+    color: #{$color-value};
+  }
+
+  // SVG Fill
+  .u-fill-#{$color-name}#{$suffix} {
+    fill: #{$color-value};
+  }
+
+  // Icon Background
+  .u-icon-color-#{$color-name}#{$suffix} {
+    &:after {
+      background-color: #{$color-value};
+    }
+  }
+}
+
+
+@mixin responsive-modularscale($value, $line-height: 1.5) {
+  font-size: ms($value, $ecx-modularscale-font-size, $ecx-modularscale-scale-ratio);
+  line-height: $line-height;
+
+  @include mq(tablet) {
+    font-size: ms($value, $ecx-modularscale-font-size-medium, $ecx-modularscale-scale-ratio-medium);
+  }
+
+  @include mq(desktop) {
+    font-size: ms($value, $ecx-modularscale-font-size-large, $ecx-modularscale-scale-ratio-large);
+  }
+}

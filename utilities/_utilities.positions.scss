@@ -1,0 +1,11 @@
+///* ========================================================================
+//   # UTILITIES.POSITIONS
+//   ======================================================================== */
+
+$ecx-utilities-positions: relative fixed static absolute !default;
+
+@each $position in $ecx-utilities-positions {
+  .u-position-#{$position} {
+    position: $position !important;
+  }
+}

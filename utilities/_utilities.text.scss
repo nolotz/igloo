@@ -1,0 +1,49 @@
+///* ========================================================================
+//   # UTILITIES.TEXT
+//   ======================================================================== */
+
+$ecx-utilities-text-size-start: -2 !default;
+$ecx-utilities-text-size-end: 10 !default;
+
+$ecx-utilities-text-weights: (
+  '-tiny': 100,
+  '-small': 400,
+  '-medium': 500,
+  '-bold': 700,
+) !default;
+
+$ecx-utilities-text-vertical-aligns: (middle baseline) !default;
+$ecx-utilities-text-aligns: (left center right) !default;
+
+.u-text-size-inherit {
+  &,
+  &:after,
+  &:before {
+    font-size: inherit;
+  }
+}
+
+@for $scale from $ecx-utilities-text-size-start through $ecx-utilities-text-size-end {
+  .u-text-size-#{$scale} {
+    @include responsive-modularscale($scale);
+  }
+}
+
+@each $size-namespace, $size in $ecx-utilities-text-weights {
+  .u-text-weight#{$size-namespace} {
+    font-weight: $size;
+  }
+}
+
+@each $size in $ecx-utilities-text-vertical-aligns {
+  .u-text-v-#{$size} {
+    vertical-align: $size;
+  }
+}
+
+@each $size in $ecx-utilities-text-aligns {
+  .u-text-#{$size} {
+    text-align: $size;
+  }
+}
+

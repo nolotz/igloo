@@ -1,0 +1,43 @@
+/* ==========================================================================
+   # COMPONENTS.HAMBURGER
+   ========================================================================== */
+
+.c-hamburger {
+  $root: &;
+  margin: 0 -2px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__line {
+    width: 36px;
+    height: 4px;
+    background-color: #444;
+    display: block;
+    margin: 6px auto;
+    transition: transform cubic-bezier(0.4, 0.0, 0.2, 1) 250ms, opacity cubic-bezier(0.4, 0.0, 0.2, 1) 250ms;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &--open {
+    #{$root}__line {
+      &:nth-child(1){
+        transform: translateY(10px) rotate(45deg);
+      }
+      &:nth-child(2){
+        opacity: 0;
+      }
+      &:nth-child(3){
+        transform: translateY(-10px) rotate(-45deg);
+      }
+    }
+  }
+}

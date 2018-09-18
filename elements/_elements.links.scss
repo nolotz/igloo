@@ -1,0 +1,15 @@
+/* ==========================================================================
+   # Anchors
+   ========================================================================== */
+
+a {
+    color: palette(primary);
+    transition: $ecx-global-transition;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover, &:active {
+        color: palette(primary, light);
+        text-decoration: none;
+    }
+}

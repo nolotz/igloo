@@ -1,0 +1,14 @@
+///* ========================================================================
+//   # UTILITIES.COLORS
+//   ======================================================================== */
+
+$ecx-utilities-colors: $ecx-colors-palette-utils !default;
+
+@each $color, $tones in $ecx-utilities-colors {
+  @each $tone in $tones {
+    $color-name:  #{$color};
+    $color-value: palette($color, $tone);
+
+    @include create-util-colors('#{$color-name}', $color-value, $tone);
+  }
+}

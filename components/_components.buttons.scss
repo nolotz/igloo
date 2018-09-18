@@ -1,0 +1,97 @@
+/* ==========================================================================
+   # COMPONENTS.BUTTONS
+   ========================================================================== */
+
+$ecx-component-buttons-variants: (primary secondary success error 'white' 'black') !default;
+$ecx-component-buttons-ghost-border-width: 2px !default;
+
+.c-btn {
+    display: inline-block; /* [1] */
+    vertical-align: middle; /* [2] */
+    font: inherit; /* [3] */
+    text-align: center; /* [4] */
+    margin: 0; /* [4] */
+    cursor: pointer; /* [5] */
+    border: none;
+    padding: spacing-scale(small) spacing-scale(base);
+    transition: $ecx-global-transition;
+    border-radius: $ecx-global-radius;
+
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+        outline: none;
+    }
+}
+
+/* Style variants
+   ========================================================================== */
+@each $style in $ecx-component-buttons-variants {
+    $color-value: palette($style);
+    $color-value-hover: darken($color-value, 12.5%);
+
+    @if (palette-has($style, dark)) {
+        $color-value-hover: palette($style, dark);
+    }
+
+    .c-btn--#{$style} {
+        @include create-button-variant($color-value, $color-value-hover);
+    }
+}
+
+/* Size variants
+   ========================================================================== */
+
+.c-btn--small {
+    padding: spacing-scale(tiny) spacing-scale(small);
+}
+
+.c-btn--large {
+    padding: spacing-scale(base) spacing-scale(large);
+}
+
+/* Ghost buttons
+   ========================================================================== */
+/**
+ * Ghost buttons have see-through backgrounds and are bordered.
+ */
+.c-btn--ghost {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+        padding: (spacing-scale(small) - $ecx-component-buttons-ghost-border-width) (spacing-scale(base) - $ecx-component-buttons-ghost-border-width);
+        background: none;
+        border: $ecx-component-buttons-ghost-border-width solid currentColor;
+    }
+
+    &.c-btn--small {
+        padding: (spacing-scale(tiny) - $ecx-component-buttons-ghost-border-width) (spacing-scale(small) - $ecx-component-buttons-ghost-border-width);
+    }
+
+    &.c-btn--large {
+        padding: (spacing-scale(base) - $ecx-component-buttons-ghost-border-width) (spacing-scale(large) - $ecx-component-buttons-ghost-border-width);
+    }
+
+    @each $style in $ecx-component-buttons-variants {
+        $color-value: palette($style);
+
+        &.c-btn--#{$style} {
+            @include create-ghost-button-variant($color-value);
+        }
+    }
+
+}
+
+.c-btn--block {
+    display: block;
+    width: 100%;
+}
+
+.c-btn--link {
+  @include reset-link();
+  padding: 0;
+  border-radius: unset;
+  background: unset;
+}

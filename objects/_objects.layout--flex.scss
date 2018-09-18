@@ -1,0 +1,18 @@
+.o-layout--flex {
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    > .o-layout__item {
+        display: flex;
+    }
+}
+
+.o-layout--vertical-center {
+    align-items: center;
+}
+
+.o-layout--horizontal-center {
+    justify-content: center;
+}

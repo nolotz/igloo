@@ -1,0 +1,18 @@
+.o-pack--flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  & > .o-pack__item {
+      display: inline-flex;
+      height: 100%;
+  }
+
+  &.o-pack--space {
+    margin-left: -$inuit-global-spacing-unit;
+
+    .o-pack__item {
+      padding-left: $inuit-global-spacing-unit;
+    }
+  }
+}

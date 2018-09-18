@@ -1,0 +1,15 @@
+///* ========================================================================
+//   # UTILITIES.CURSOR
+//   ======================================================================== */
+
+$ecx-utilities-cursor: (
+	auto
+    pointer,
+    'not-allowed',
+) !default;
+
+@each $cursor in $ecx-utilities-cursor {
+  .u-cursor-#{$cursor} {
+    cursor: $cursor;
+  }
+}
